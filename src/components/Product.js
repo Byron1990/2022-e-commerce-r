@@ -15,29 +15,6 @@ interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
 }
 
-/* const useStyle = makeStyles(() => ({
-  root: {
-    maxWidth: 345,
-  },
-  action: {
-    marginTop: "1rem",
-  },
-  media: {
-    height: 0,
-    paddingTop: "56.25%", // 16:9
-  },
-  expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: "rotate(180deg)",
-  },
-})); */
-
 const ExpandMore = styled((props: ExpandMoreProps) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -60,7 +37,7 @@ export default function Product() {
       <CardHeader
         action={
           <Typography variant="h5" color="textSecondary">
-            {accounting.formatMoney(4999.99)}
+            {accounting.formatMoney(100)}
           </Typography>
         }
         title="Shoes"
@@ -107,3 +84,27 @@ export default function Product() {
     </Card>
   );
 }
+
+
+/* const useStyle = makeStyles(() => ({
+  root: {
+    maxWidth: 345,
+  },
+  action: {
+    marginTop: "1rem",
+  },
+  media: {
+    height: 0,
+    paddingTop: "56.25%", // 16:9
+  },
+  expand: {
+    transform: "rotate(0deg)",
+    marginLeft: "auto",
+    transition: theme.transitions.create("transform", {
+      duration: theme.transitions.duration.shortest,
+    }),
+  },
+  expandOpen: {
+    transform: "rotate(180deg)",
+  },
+})); */

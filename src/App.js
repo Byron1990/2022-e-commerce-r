@@ -1,11 +1,12 @@
 import React from "react";
 import Product from "./components/Product";
+import Navbar from "./components/Navbar";
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <h1>Esto es el inicio de RL</h1>
+      <Navbar />
       <Product />
     </div>
   );

@@ -28,7 +28,8 @@ export default function Navbar() {
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1 }}
+            align="right"
+            sx={{ flexGrow: 1, marginRight: 2 }}
             component="p"
           >
             Hello User

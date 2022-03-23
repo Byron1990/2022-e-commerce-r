@@ -11,34 +11,16 @@ import { createTheme } from "@mui/material/styles";
 import { ShoppingCart } from "@mui/icons-material";
 import Badge from "@mui/material/Badge";
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      light: "#757ce8",
-      main: "#3f50b5",
-      dark: "#002884",
-      contrastText: "#fff",
-    },
-    secondary: {
-      light: "#ff7961",
-      main: "#f44336",
-      dark: "#ba000d",
-      contrastText: "#000",
-    },
-  },
-});
-
 export default function Navbar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed">
+    <Box sx={{ flexGrow: 1, marginBottom: 1 }}>
+      <AppBar position="static">
         <Toolbar>
           <IconButton
             size="large"
             edge="start"
             color="inherit"
             aria-label="menu"
-            marginRight="10px"
             sx={{ mr: 2 }}
           >
             <img src={logo} height="50rem" />

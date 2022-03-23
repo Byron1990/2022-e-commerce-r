@@ -26,32 +26,35 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   }),
 }));
 
-export default function Product() {
+export default function Product({
+  product: { id, name, productType, price, rating, image, description },
+}) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card
+      sx={{
+        flexGrow: 1,
+        maxWidth: 345,
+        margin: 3,
+      }}
+    >
       <CardHeader
         action={
           <Typography variant="h5" color="textSecondary">
-            {accounting.formatMoney(100)}
+            {accounting.formatMoney(price)}
           </Typography>
         }
-        title="Shoes"
+        title={name}
         subheader="in Stock"
       />
-      <CardMedia
-        component="img"
-        height="194"
-        image="https://www.popsci.com/uploads/2021/01/14/54BGRKCC7BEAPGZ3XAK5RHJF6M.jpg?auto=webp"
-        alt="Paella dish"
-      />
+      <CardMedia component="img" height="194" image={image} alt="Paella dish" />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          Running shoes
+          {productType}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -59,7 +62,7 @@ export default function Product() {
           <AddShoppingCart font-size="lange" />
         </IconButton>
         <IconButton>
-          {Array(4)
+          {Array(rating)
             .fill()
             .map((_, i) => (
               <p>&#x2B50;</p>
@@ -76,35 +79,9 @@ export default function Product() {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>
-            "Running shoes fot the tiger that is inside you"
-          </Typography>
+          <Typography paragraph>{description}</Typography>
         </CardContent>
       </Collapse>
     </Card>
   );
 }
-
-
-/* const useStyle = makeStyles(() => ({
-  root: {
-    maxWidth: 345,
-  },
-  action: {
-    marginTop: "1rem",
-  },
-  media: {
-    height: 0,
-    paddingTop: "56.25%", // 16:9
-  },
-  expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: "rotate(180deg)",
-  },
-})); */

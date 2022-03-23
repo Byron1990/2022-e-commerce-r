@@ -4,7 +4,7 @@ const products = [
     name: "Shoes",
     productType: "Running shoes",
     price: "100",
-    rating: 4,
+    rating: 3,
     image:
       "https://www.popsci.com/uploads/2021/01/14/54BGRKCC7BEAPGZ3XAK5RHJF6M.jpg?auto=webp",
     description: "Running shoes for the tiger that live in you",
@@ -31,4 +31,16 @@ const products = [
     description:
       "Drone with 4k camera, time to fly around 20 minutes and can be controlled until 200 meters",
   },
+  {
+    id: 4,
+    name: "Molecular salads",
+    productType: "Food",
+    price: "70",
+    rating: 5,
+    image:
+      "https://itk-assets.nyc3.cdn.digitaloceanspaces.com/2021/05/molecular-salad.jpg",
+    description: "Molecular salad ready to eat",
+  },
 ];
+
+export default products;

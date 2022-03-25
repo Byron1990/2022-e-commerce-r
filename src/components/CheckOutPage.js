@@ -5,6 +5,7 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Product from "./Product";
 import CheckOutCard from "./CheckOutCard";
+import Total from "./Total";
 import products from "../product-data";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -27,7 +28,7 @@ function ShoppingProducts() {
   );
 }
 
-export default function FullWidthGrid() {
+export default function CheckOutPage() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
@@ -38,7 +39,7 @@ export default function FullWidthGrid() {
           <ShoppingProducts />
         </Grid>
         <Grid item xs={12} sm={4} md={3}>
-          <Item>Total</Item>
+          <Total />
         </Grid>
       </Grid>
     </Box>

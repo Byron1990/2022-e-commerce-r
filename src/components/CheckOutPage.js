@@ -7,6 +7,7 @@ import Product from "./Product";
 import CheckOutCard from "./CheckOutCard";
 import Total from "./Total";
 import products from "../product-data";
+import { useStateValue } from "../StateProvider";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -17,11 +18,12 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function ShoppingProducts() {
+  const [{ basket }, dispatch] = useStateValue();
   return (
     <Box sx={{ flexGrow: 1 }}>
-      {products.map((product) => (
-        <Grid product xs={12} sm={8} md={6} lg={4}>
-          <CheckOutCard key={product.id} product={product} />
+      {basket.map((item) => (
+        <Grid item xs={12} sm={8} md={6} lg={4}>
+          <CheckOutCard key={item.id} product={item} />
         </Grid>
       ))}
     </Box>

@@ -10,21 +10,26 @@ import logo from "../assets/Logo.png";
 import { createTheme } from "@mui/material/styles";
 import { ShoppingCart } from "@mui/icons-material";
 import Badge from "@mui/material/Badge";
+import { Link } from "react-router-dom";
+import { useStateValue } from "../StateProvider";
 
 export default function Navbar() {
+  const [{ basket }, dispatch] = useStateValue();
   return (
     <Box sx={{ flexGrow: 1, marginBottom: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <img src={logo} height="50rem" />
-          </IconButton>
+          <Link to="/">
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+            >
+              <img src={logo} height="50rem" />
+            </IconButton>
+          </Link>
           <Typography
             variant="h6"
             component="div"
@@ -37,15 +42,17 @@ export default function Navbar() {
           <Button color="inherit" variant="outlined">
             <strong>Login</strong>
           </Button>
-          <IconButton
-            arial-label="show cart items"
-            color="inherit"
-            variant="outlined"
-          >
-            <Badge badgeContent={2} color="secondary">
-              <ShoppingCart fontSize="large" />
-            </Badge>
-          </IconButton>
+          <Link to="/checkout-page">
+            <IconButton
+              arial-label="show cart items"
+              color="inherit"
+              variant="outlined"
+            >
+              <Badge badgeContent={basket.length} color="secondary">
+                <ShoppingCart fontSize="large" />
+              </Badge>
+            </IconButton>
+          </Link>
         </Toolbar>
       </AppBar>
     </Box>

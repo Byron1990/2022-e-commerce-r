@@ -18,7 +18,7 @@ export default function Total() {
   return (
     <Box sx={{ width: "100%" }}>
       <Stack spacing={2} align="center">
-        <h3>Total items: 3</h3>
+        <h3>Total items: 7</h3>
         <h3>Total price: {accounting.formatMoney(100)}</h3>
         <Button variant="contained">Check Out</Button>
       </Stack>

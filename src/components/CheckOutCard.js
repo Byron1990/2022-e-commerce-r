@@ -12,6 +12,9 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { AddShoppingCart } from "@material-ui/icons";
 import accounting from "accounting";
+import { useStateValue } from "../StateProvider";
+import { actionTypes } from "../reducer";
+
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
 }
@@ -30,8 +33,13 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 export default function CheckOutCard({
   product: { id, name, productType, price, rating, image, description },
 }) {
+  const [{ basket }, dispatch] = useStateValue();
   const [expanded, setExpanded] = React.useState(false);
-
+  const removeItem = () =>
+    dispatch({
+      type: actionTypes.REMOVE_FROM_BASKET,
+      id: id,
+    });
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -52,7 +60,7 @@ export default function CheckOutCard({
         title={name}
         subheader="in Stock"
       />
-      <CardMedia component="img" height="194" image={image} alt="Paella dish" />
+      <CardMedia component="img" height="194" image={image} alt="Not Found" />
       <CardActions
         disableSpacing
         sx={{
@@ -69,7 +77,7 @@ export default function CheckOutCard({
         </IconButton>
 
         <IconButton aria-label="show more">
-          <DeleteIcon />
+          <DeleteIcon onClick={removeItem} />
         </IconButton>
       </CardActions>
     </Card>

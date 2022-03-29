@@ -39,9 +39,11 @@ export default function Navbar() {
           >
             Hello User
           </Typography>
-          <Button color="inherit" variant="outlined">
-            <strong>Login</strong>
-          </Button>
+          <Link to="/signin">
+            <Button color="inherit" variant="outlined">
+              <strong>Login</strong>
+            </Button>
+          </Link>
           <Link to="/checkout-page">
             <IconButton
               arial-label="show cart items"

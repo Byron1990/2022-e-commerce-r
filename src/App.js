@@ -11,7 +11,6 @@ import auth from "./firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { actionTypes } from "./reducer";
 import { useStateValue } from "./StateProvider";
-import Checkout from "./components/CheckOutForms/Checkout";
 
 function App() {
   const [{ user }, dispatch] = useStateValue();
@@ -45,7 +44,6 @@ function App() {
           <Route path="/" element={<Products />}></Route>
           <Route path="/signin" element={<SignIn />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
-          <Route path="/checkout" element={<Checkout />}></Route>
         </Routes>
       </div>
     </BrowserRouter>

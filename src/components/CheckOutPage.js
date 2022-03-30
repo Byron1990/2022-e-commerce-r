@@ -21,13 +21,11 @@ function ShoppingProducts() {
   const [{ basket }, dispatch] = useStateValue();
   return (
     <Box sx={{ flexGrow: 1 }}>
-      {basket
-        ? basket.map((item) => (
-            <Grid item xs={12} sm={8} md={6} lg={4}>
-              <CheckOutCard key={item.id} product={item} />
-            </Grid>
-          ))
-        : null}
+      {basket.map((item) => (
+        <Grid item xs={12} sm={8} md={6} lg={4}>
+          <CheckOutCard key={item.id} product={item} />
+        </Grid>
+      ))}
     </Box>
   );
 }

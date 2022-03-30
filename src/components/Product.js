@@ -76,10 +76,7 @@ export default function Product({
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton
-          aria-label="Add to Cart"
-          onClick={basket ? addToBasket : null}
-        >
+        <IconButton aria-label="Add to Cart" onClick={addToBasket}>
           <AddShoppingCart font-size="lange" />
         </IconButton>
         <IconButton>

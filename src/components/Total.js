@@ -7,7 +7,6 @@ import accounting from "accounting";
 import Button from "@mui/material/Button";
 import { getBasketTotal } from "../reducer";
 import { useStateValue } from "../StateProvider";
-import { Link } from "react-router-dom";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -18,8 +17,6 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function Total() {
-  const linkCheckout = () => {};
-
   const [{ basket }, dispatch] = useStateValue();
   console.log("Basket: " + basket);
   console.log(getBasketTotal(basket));
@@ -28,11 +25,7 @@ export default function Total() {
       <Stack spacing={2} align="center">
         <h3>Total items: {basket.length}</h3>
         <h3>Total price: {accounting.formatMoney(getBasketTotal(basket))}</h3>
-        <Link to="/checkout">
-          <Button onclick={linkCheckout} variant="contained">
-            Check Out
-          </Button>
-        </Link>
+        <Button variant="contained">Check Out</Button>
       </Stack>
     </Box>
   );

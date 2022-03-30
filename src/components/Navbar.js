@@ -19,24 +19,23 @@ import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const [{ basket, user }, dispatch] = useStateValue();
-
+  const history = useNavigate();
   const handleAuth = () => {
-    const history = useNavigate();
     if (user) {
+      console.log("Usuario: " + user);
       signOut(auth)
         .then(() => {
-          dispatch({
-            type: actionTypes.EMPTY_BASKET,
-            basket: [],
-          });
           dispatch({
             type: actionTypes.SET_USER,
             user: null,
           });
-          history("/", { replace: false });
+          dispatch({
+            type: actionTypes.EMPTY_BASKET,
+            basket: [],
+          });
         })
         .catch((error) => {
-          alert(error);
+          // An error happened.
         });
     }
   };
@@ -76,7 +75,10 @@ export default function Navbar() {
               color="inherit"
               variant="outlined"
             >
-              <Badge badgeContent={basket.length} color="secondary">
+              <Badge
+                badgeContent={basket ? basket.length : null}
+                color="secondary"
+              >
                 <ShoppingCart fontSize="large" />
               </Badge>
             </IconButton>

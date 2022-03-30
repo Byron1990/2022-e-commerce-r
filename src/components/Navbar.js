@@ -12,9 +12,35 @@ import { ShoppingCart } from "@mui/icons-material";
 import Badge from "@mui/material/Badge";
 import { Link } from "react-router-dom";
 import { useStateValue } from "../StateProvider";
+import auth from "../firebase";
+import { signOut } from "firebase/auth";
+import { actionTypes } from "../reducer";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
-  const [{ basket }, dispatch] = useStateValue();
+  const [{ basket, user }, dispatch] = useStateValue();
+
+  const handleAuth = () => {
+    const history = useNavigate();
+    if (user) {
+      signOut(auth)
+        .then(() => {
+          dispatch({
+            type: actionTypes.EMPTY_BASKET,
+            basket: [],
+          });
+          dispatch({
+            type: actionTypes.SET_USER,
+            user: null,
+          });
+          history("/", { replace: false });
+        })
+        .catch((error) => {
+          alert(error);
+        });
+    }
+  };
+
   return (
     <Box sx={{ flexGrow: 1, marginBottom: 1 }}>
       <AppBar position="static">
@@ -37,11 +63,11 @@ export default function Navbar() {
             sx={{ flexGrow: 1, marginRight: 2 }}
             component="p"
           >
-            Hello User
+            Hello {user ? user.email : "Guest"}
           </Typography>
           <Link to="/signin">
-            <Button color="inherit" variant="outlined">
-              <strong>Login</strong>
+            <Button color="inherit" variant="outlined" onClick={handleAuth}>
+              <strong>{user ? "Sign Out" : "Login"}</strong>
             </Button>
           </Link>
           <Link to="/checkout-page">

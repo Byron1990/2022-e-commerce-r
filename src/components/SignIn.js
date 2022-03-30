@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -12,7 +12,9 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Link as RouteLink, useHistory } from "react-router-dom";
+import { Link as RouteLink, useNavigate } from "react-router-dom";
+import auth from "../firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 function Copyright(props) {
   return (
@@ -44,6 +46,28 @@ export default function SignIn() {
     });
   };
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const history = useNavigate();
+
+  const startSignIn = (e) => {
+    e.preventDefault();
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        history("/", { replace: true });
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(error);
+        // ..
+      });
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -69,6 +93,8 @@ export default function SignIn() {
             sx={{ mt: 1 }}
           >
             <TextField
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               margin="normal"
               required
               fullWidth
@@ -80,6 +106,8 @@ export default function SignIn() {
             />
             <TextField
               margin="normal"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required
               fullWidth
               name="password"
@@ -97,6 +125,7 @@ export default function SignIn() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={startSignIn}
             >
               Sign In
             </Button>

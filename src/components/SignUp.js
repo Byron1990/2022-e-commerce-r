@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -12,7 +12,9 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Link as RouteLink, useHistory } from "react-router-dom";
+import { Link as RouteLink, useNavigate } from "react-router-dom";
+import auth from "../firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 function Copyright(props) {
   return (
@@ -42,6 +44,27 @@ export default function SignUp() {
       email: data.get("email"),
       password: data.get("password"),
     });
+  };
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const history = useNavigate();
+
+  const startSignUp = (e) => {
+    e.preventDefault();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        history("/", { replace: true });
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(error);
+        // ..
+      });
   };
 
   return (
@@ -89,9 +112,10 @@ export default function SignUp() {
                   name="lastName"
                   autoComplete="family-name"
                 />
-              </Grid>
-              <Grid item xs={12}>
+                <Grid item xs={12}></Grid>
                 <TextField
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
                   fullWidth
                   id="email"
@@ -102,6 +126,8 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   required
                   fullWidth
                   name="password"
@@ -125,6 +151,7 @@ export default function SignUp() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={startSignUp}
             >
               Sign Up
             </Button>
